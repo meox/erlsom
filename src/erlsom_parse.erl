@@ -482,7 +482,7 @@ stateMachine(Event, State = #state{currentState = #cs{re = [],
                   resultSoFar = Tail,
                   value_acc = Acc2};
     _Else ->
-      throw({error, {"1 - Unexpected event, expected end-tag"}})
+      throw({error, {"1 - Unexpected event, expected end-tag", Event, ElementRecord}})
   end;
 
 stateMachine(Event, _State = #state{currentState = #cs{re = [],
