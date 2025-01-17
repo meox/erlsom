@@ -182,16 +182,16 @@
 %%%% is set. This makes it possible to suppress this output in parts of the test program that use erlsom for parsing
 %%%% of a big configuration file.
 
-%% debugFormat(Format, Args) ->
-   %% case get(erlsom_debug) of
-     %% _ ->
-       %% io:format(Format, Args);
-     %% _Else ->
-       %% true
-   %% end.
+debugFormat(Format, Args) ->
+   case get(erlsom_debug) of
+     _ ->
+       io:format(Format, Args);
+     _Else ->
+       true
+   end.
 
-%% debug(Text) ->
-   %% debugFormat("erlsom_parse: ~P\n", [Text, 20]).
+debug(Text) ->
+   debugFormat("erlsom_parse: ~P\n", [Text, 20]).
 
 %% debugMessage(Text) ->
    %% io:format("\nstatemachine: ~p\n", [Text]).
@@ -880,6 +880,7 @@ stateMachine(Event, State = #state{currentState = #cs{re = RemainingElements,
             end;
         _Else ->
            %% See whether there is an 'Any' alternative.
+           debug(Alternatives),
            case Alternatives of
              [#alt{tag='#any', anyInfo = #anyInfo{ns = AltNs}}] when AltNs /= "##other" ->
                %% Add the elements of the model to the alternatives and try again
