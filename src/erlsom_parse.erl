@@ -197,9 +197,8 @@ debug(Text) ->
    %% io:format("\nstatemachine: ~p\n", [Text]).
    %% %% debugFormat("\nstatemachine: ~p\n", [Text]).
 
-%% debugEvent(S) ->
-   %% io:format("event      : ~p\n", [S]).
-   %% %% debugFormat("event      : ~p\n", [S]).
+debugEvent(S) ->
+  debugFormat("event      : ~p\n", [S]).
 
 %% debugState(#state{currentState = Cs,
                   %% resultSoFar = Stack}) ->
@@ -878,9 +877,9 @@ stateMachine(Event, State = #state{currentState = #cs{re = RemainingElements,
                   end
               end
             end;
-        Else ->
+        _Else ->
            %% See whether there is an 'Any' alternative.
-           debug(Else),
+           debugEvent(Event),
            debug(Alternatives),
            case Alternatives of
              [#alt{tag='#any', anyInfo = #anyInfo{ns = AltNs}}] when AltNs /= "##other" ->
