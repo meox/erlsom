@@ -719,8 +719,6 @@ pass5Alternatives([], Acc, _Types, _NextElements, _Info, _Tns) ->
 pass5Alternative(Alternative = #alt{tag = Name, anyInfo = AnyInfo}, Types, NextElements, Info, Tns) ->
   case Name of
     '#any' ->
-      io:format("-----> alts:~p, type:~p, nextelems:~p, info:~p, tns:~p\n", [Alternative, Types, NextElements, Info, Tns]),
-
       %% #anyInfo{prCont = Pc}  = AnyInfo,
       {Ns, Pc} = case AnyInfo of
                   #anyInfo{} -> {AnyInfo#anyInfo.ns, AnyInfo#anyInfo.prCont};
@@ -731,6 +729,7 @@ pass5Alternative(Alternative = #alt{tag = Name, anyInfo = AnyInfo}, Types, NextE
         "lax" ->
           case Ns of
             "##other" ->
+              io:format("-----> alts:~p, type:~p, nextelems:~p, info:~p, tns:~p\n", [Alternative, Types, NextElements, Info, Tns]),
               [Alternative#alt{nxt=getNextTags(NextElements)} | getDocumentAlternatives(AnyInfo, Types, Info, Tns)];
             _ ->
               %% in this case we look for the top-level alternatives in the model when
