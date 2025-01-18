@@ -878,8 +878,9 @@ stateMachine(Event, State = #state{currentState = #cs{re = RemainingElements,
                   end
               end
             end;
-        _Else ->
+        Else ->
            %% See whether there is an 'Any' alternative.
+           debug(Else),
            debug(Alternatives),
            case Alternatives of
              [#alt{tag='#any', anyInfo = #anyInfo{ns = AltNs}}] when AltNs /= "##other" ->
