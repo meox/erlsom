@@ -717,9 +717,10 @@ pass5Alternatives([], Acc, _Types, _NextElements, _Info, _Tns) ->
   Acc.
 
 pass5Alternative(Alternative = #alt{tag = Name, anyInfo = AnyInfo}, Types, NextElements, Info, Tns) ->
-  io:format("-----> alts:~p, type:~p, nextelems:~p, info:~p, tns:~p\n", [Alternative, Types, NextElements, Info, Tns]),
   case Name of
     '#any' ->
+      io:format("-----> alts:~p, type:~p, nextelems:~p, info:~p, tns:~p\n", [Alternative, Types, NextElements, Info, Tns]),
+
       %% #anyInfo{prCont = Pc}  = AnyInfo,
       {Ns, Pc} = case AnyInfo of
                   #anyInfo{} -> {AnyInfo#anyInfo.ns, AnyInfo#anyInfo.prCont};
