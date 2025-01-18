@@ -813,7 +813,7 @@ getMatchingAlts([Alt = #alt{tag=Tag} | Tail], Acc, Namespaces, Info = #schemaInf
           getMatchingAlts(Tail, Acc, Namespaces, Info, Tns)
       end;
     "##other" ->
-      io:format("$$$ NS=~p\n", [Namespace]),
+      io:format("$$$ NS=~p, alt = ~p\n", [Namespace, Alt]),
       case Namespace of
         undefined ->
           getMatchingAlts(Tail, Acc, Namespaces, Info, Tns);
