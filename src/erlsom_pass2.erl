@@ -737,7 +737,7 @@ pass5Alternative(Alternative = #alt{tag = Name, anyInfo = AnyInfo}, Types, NextE
               [Alternative#alt{nxt=getNextTags(NextElements)}]
           end;
         _ ->
-          [Alternative#alt{nxt=getNextTags(NextElements)}]
+          [Alternative | getDocumentAlternatives(AnyInfo, Types, Info, Tns)]
       end;
     _Else ->
       [Alternative]
@@ -817,8 +817,8 @@ getMatchingAlts([Alt = #alt{tag=Tag} | Tail], Acc, Namespaces, Info = #schemaInf
         %% TODO: '##other' doesn't work, because Tns isn't always correct: see soap-wsdl example
         %% problem arises with imported namespaces. In the case of wsdl (imported into soap)
         %% Tns is soap - so the code below (commented out) doesn't work correctly.
-        Tns ->
-          getMatchingAlts(Tail, Acc, Namespaces, Info, Tns);
+        % Tns ->
+        %   getMatchingAlts(Tail, Acc, Namespaces, Info, Tns);
         _Else ->
           getMatchingAlts(Tail, add_alternative_no_dups(Alt, Acc), Namespaces, Info, Tns)
       end;
