@@ -729,11 +729,8 @@ pass5Alternative(Alternative = #alt{tag = Name, anyInfo = AnyInfo}, Types, NextE
         "lax" ->
           case Ns of
             "##other" ->
-              io:format("-----> alts:~p, type:~p, nextelems:~p, info:~p, tns:~p\n", [Alternative, Types, NextElements, Info, Tns]),
               [Alternative#alt{nxt=getNextTags(NextElements)} | getDocumentAlternatives(AnyInfo, Types, Info, Tns)];
             _ ->
-              io:format("-----> alts:~p, type:~p, nextelems:~p, info:~p, tns:~p\n", [Alternative, Types, NextElements, Info, Tns]),
-
               %% in this case we look for the top-level alternatives in the model when
               %% required during the parsing. This to prevent the model from becoming very large
               %% if there are a lot of "Any" extension points (like in the eBay WSDL, for example).
