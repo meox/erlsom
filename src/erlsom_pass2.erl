@@ -729,6 +729,7 @@ pass5Alternative(Alternative = #alt{tag = Name, anyInfo = AnyInfo}, Types, NextE
         "lax" ->
           case Ns of
             "##other" ->
+              io:format("-----> alts:~p, type:~p, nextelems:~p, info:~p, tns:~p\n", [Alternative, Types, NextElements, Info, Tns]),
               [Alternative#alt{nxt=getNextTags(NextElements)} | getDocumentAlternatives(AnyInfo, Types, Info, Tns)];
             _ ->
               io:format("-----> alts:~p, type:~p, nextelems:~p, info:~p, tns:~p\n", [Alternative, Types, NextElements, Info, Tns]),
@@ -813,7 +814,6 @@ getMatchingAlts([Alt = #alt{tag=Tag} | Tail], Acc, Namespaces, Info = #schemaInf
           getMatchingAlts(Tail, Acc, Namespaces, Info, Tns)
       end;
     "##other" ->
-      io:format("$$$ NS=~p, alt = ~p\n", [Namespace, Alt]),
       case Namespace of
         undefined ->
           getMatchingAlts(Tail, Acc, Namespaces, Info, Tns);
