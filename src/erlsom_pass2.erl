@@ -737,7 +737,7 @@ pass5Alternative(Alternative = #alt{tag = Name, anyInfo = AnyInfo}, Types, NextE
               [Alternative#alt{nxt=getNextTags(NextElements)}]
           end;
         _ ->
-          [Alternative | getDocumentAlternatives(AnyInfo, Types, Info, Tns)]
+          [Alternative#alt{nxt=getNextTags(NextElements)} | getDocumentAlternatives(AnyInfo, Types, Info, Tns)]
       end;
     _Else ->
       [Alternative]
